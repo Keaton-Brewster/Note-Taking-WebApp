@@ -71,7 +71,7 @@ const handleNoteDelete = (e) => {
   e.stopPropagation();
 
   // added this little bit to confirm if a user actually wants to delete a note
-  if (!confirm("Are you sure?")) {
+  if (!confirm("Are you sure you want to delete this note?")) {
     return;
   }
 
