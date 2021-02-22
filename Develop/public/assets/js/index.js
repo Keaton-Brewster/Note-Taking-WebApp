@@ -64,21 +64,15 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = (e) => {
-  e.preventDefault();
-
+const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote)
-    .then(() => {
-      getAndRenderNotes();
-      renderActiveNote();
-    })
-    .catch((err) => {
-      throw err;
-    });
+  saveNote(newNote).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
+  });
 };
 
 // Delete the clicked note
@@ -123,6 +117,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
+  console.log(jsonNotes);
   if (window.location.pathname === "/notes") {
     noteList.forEach((el) => (el.innerHTML = ""));
   }
