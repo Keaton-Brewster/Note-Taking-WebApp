@@ -158,10 +158,17 @@ const renderNoteList = async (notes) => {
   }
 
   jsonNotes.forEach((note) => {
-    const li = createLi(note.title);
-    li.dataset.note = JSON.stringify(note);
+    if (note.id === "noDelete") {
+      let li = createLi(note.title, false);
+      li.dataset.note = JSON.stringify(note);
 
-    noteListItems.push(li);
+      noteListItems.push(li);
+    } else {
+      let li = createLi(note.title);
+      li.dataset.note = JSON.stringify(note);
+
+      noteListItems.push(li);
+    }
   });
 
   if (window.location.pathname === "/notes") {
