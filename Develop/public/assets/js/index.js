@@ -68,7 +68,12 @@ const deleteNote = (id) =>
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // prevents the click listener for the list from being called when the button inside of it is clicked
-  // e.stopPropagation();
+  e.stopPropagation();
+
+  // added this little bit to confirm if a user actually wants to delete a note
+  if (!confirm("Are you sure?")) {
+    return;
+  }
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute("data-note")).id;
