@@ -25,14 +25,6 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
-const getNotes = () =>
-  fetch("/api/notes", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
 const saveNote = (note) =>
   fetch("/api/notes", {
     method: "POST",
@@ -41,14 +33,16 @@ const saveNote = (note) =>
     },
     body: JSON.stringify(note),
   });
-
-const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
+const handleNoteSave = () => {
+  const newNote = {
+    title: noteTitle.value,
+    text: noteText.value,
+  };
+  saveNote(newNote).then(() => {
+    getAndRenderNotes();
+    renderActiveNote();
   });
+};
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -64,21 +58,17 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = () => {
-  const newNote = {
-    title: noteTitle.value,
-    text: noteText.value,
-  };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
+const deleteNote = (id) =>
+  fetch(`/api/notes/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
-};
-
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   // prevents the click listener for the list from being called when the button inside of it is clicked
-  e.stopPropagation();
+  // e.stopPropagation();
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute("data-note")).id;
@@ -114,6 +104,13 @@ const handleRenderSaveBtn = () => {
   }
 };
 
+const getNotes = () =>
+  fetch("/api/notes", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
