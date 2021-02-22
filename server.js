@@ -32,9 +32,8 @@ app.get("/notes", (req, res) => {
 // handles the saving of a note from notes.html
 app.post("/api/notes", (req, res) => {
   const data = req.body;
-  let dbData = db;
   data.id = uniqid();
-  const notes = [...dbData, data];
+  const notes = [...db, data];
 
   jsonfile.writeFileSync(`${__dirname}/Develop/db/db.json`, notes, (err) => {
     if (err) throw err;
