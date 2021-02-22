@@ -1,12 +1,12 @@
 const express = require("express");
-const fs = require("fs");
+const jsonfile = require("jsonfile");
 const path = require("path");
 const uniqid = require("uniqid");
 
 const app = express();
 const PORT = process.env.PORT || 9090;
 
-let db = fs.readFileSync(
+let db = jsonfile.readFileSync(
   `${__dirname}/Develop/db/db.json`,
   { encoding: "utf-8" },
   (err) => {
@@ -29,14 +29,14 @@ app.get("/notes", (req, res) => {
 // handles the saving of a note from notes.html
 app.post("/api/notes", (req, res) => {
   const data = req.body;
-  let dbData = JSON.parse(db);
+  let dbData = db;
   data.id = uniqid();
-  const notes = JSON.stringify([...dbData, data]);
+  const notes = [...dbData, data];
 
-  fs.writeFileSync(`${__dirname}/Develop/db/db.json`, notes, (err) => {
+  jsonfile.writeFileSync(`${__dirname}/Develop/db/db.json`, notes, (err) => {
     if (err) throw err;
   });
-  db = fs.readFileSync(
+  db = jsonfile.readFileSync(
     `${__dirname}/Develop/db/db.json`,
     { encoding: "utf-8" },
     (err) => {
