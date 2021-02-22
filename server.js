@@ -6,7 +6,7 @@ const uniqid = require("uniqid");
 const app = express();
 const PORT = process.env.PORT || 9090;
 
-let json = fs.readFileSync(
+let db = fs.readFileSync(
   `${__dirname}/Develop/db/db.json`,
   { encoding: "utf-8" },
   (err) => {
@@ -29,14 +29,14 @@ app.get("/notes", (req, res) => {
 // handles the saving of a note from notes.html
 app.post("/api/notes", (req, res) => {
   const data = req.body;
-  let dbData = JSON.parse(json);
+  let dbData = JSON.parse(db);
   data.id = uniqid();
   const notes = JSON.stringify([...dbData, data]);
 
   fs.writeFileSync(`${__dirname}/Develop/db/db.json`, notes, (err) => {
     if (err) throw err;
   });
-  json = fs.readFileSync(
+  db = fs.readFileSync(
     `${__dirname}/Develop/db/db.json`,
     { encoding: "utf-8" },
     (err) => {
@@ -48,7 +48,7 @@ app.post("/api/notes", (req, res) => {
 
 // handles the rendering of the notes on the notes.html
 app.get("/api/notes", (req, res) => {
-  res.send(json);
+  res.send(db);
 });
 
 app.listen(PORT, (err) => {
