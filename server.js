@@ -2,7 +2,7 @@ const express = require("express");
 const jsonfile = require("jsonfile");
 const path = require("path");
 const uniqid = require("uniqid");
-var db;
+let db;
 
 const app = express();
 const PORT = process.env.PORT || 9090;
