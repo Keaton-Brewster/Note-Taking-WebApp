@@ -18,7 +18,7 @@ This application is covered under the MIT license.
 
 ## <a id="usage"></a> Usage
 
-Using is so easy, a dog could probably do it!
+Using is easy! You can do it!
 
 ## Just go here: [Note Taker](https://notetaker-keatonbrewster.herokuapp.com/)
 
