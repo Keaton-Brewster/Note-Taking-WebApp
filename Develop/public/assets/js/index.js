@@ -9,6 +9,7 @@ if (window.location.pathname === "/notes") {
   noteText = document.querySelector(".note-textarea");
   saveNoteBtn = document.querySelector(".save-note");
   newNoteBtn = document.querySelector(".new-note");
+  prevSavedNote = document.querySelector(".list-group");
   noteList = document.querySelectorAll(".list-container .list-group");
 }
 
@@ -95,7 +96,7 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute("data-note"));
+  activeNote = JSON.parse(e.target.getAttribute("data-note"));
   renderActiveNote();
 };
 
@@ -136,7 +137,6 @@ const renderNoteList = async (notes) => {
 
     const spanEl = document.createElement("span");
     spanEl.innerText = text;
-    spanEl.addEventListener("click", handleNoteView);
 
     liEl.append(spanEl);
 
@@ -185,6 +185,7 @@ const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === "/notes") {
   saveNoteBtn.addEventListener("click", handleNoteSave);
+  prevSavedNote.addEventListener("click", handleNoteView);
   newNoteBtn.addEventListener("click", handleNewNoteView);
   noteTitle.addEventListener("keyup", handleRenderSaveBtn);
   noteText.addEventListener("keyup", handleRenderSaveBtn);
