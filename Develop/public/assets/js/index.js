@@ -53,6 +53,10 @@ const renderActiveNote = () => {
     noteTitle.value = activeNote.title;
     noteText.value = activeNote.text;
   } else {
+    // These two removeAttributes() were not originally in this file, and i had
+    // to add them to get the write new note button to work properly
+    noteTitle.removeAttribute("readonly");
+    noteText.removeAttribute("readonly");
     noteTitle.value = "";
     noteText.value = "";
   }
