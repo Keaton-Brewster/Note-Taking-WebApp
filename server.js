@@ -1,5 +1,6 @@
 const express = require("express");
 const api = require(`./Develop/routing/apiRoutes`);
+const html = require("./Develop/routing/htmlRoutes")
 
 const app = express();
 const PORT = process.env.PORT || 9090;
@@ -11,7 +12,7 @@ app.use(express.urlencoded({
 app.use(express.static(`${__dirname}/Develop/public`));
 
 api.route(app);
-require("./Develop/routing/htmlRoutes")(app);
+html.route(app);
 
 app.listen(PORT, (err) => {
   if (err) throw err;
