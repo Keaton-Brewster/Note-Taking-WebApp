@@ -31,10 +31,10 @@ module.exports = file = {
     // handles the deletion of notes from the notes.html
     app.delete("/api/notes/:deleteID", (req, res) => {
       const delID = req.params.deleteID;
-      const filterdDB = db.filter((note) => {
+      const filteredDB = db.filter((note) => {
         return note.id !== delID;
       });
-      jsonfile.writeFileSync(`${__dirname}/../db/db.json`, filterdDB, (err) => {
+      jsonfile.writeFileSync(`${__dirname}/../db/db.json`, filteredDB, (err) => {
         if (err) throw err;
       });
       setDB();
