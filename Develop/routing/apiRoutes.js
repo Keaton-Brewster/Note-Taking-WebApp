@@ -3,8 +3,9 @@ const jsonfile = require("jsonfile");
 
 const setDB = () => {
   db = jsonfile.readFileSync(
-    `${__dirname}/../db/db.json`,
-    { encoding: "utf-8" },
+    `${__dirname}/../db/db.json`, {
+      encoding: "utf-8"
+    },
     (err) => {
       if (err) throw err;
     }
