@@ -12,7 +12,7 @@ const setDB = () => {
   );
 };
 
-module.exports = file = {
+module.exports = apiRouting = {
   setDB: setDB,
   route: (app) => {
     // handles the saving of a note from notes.html
