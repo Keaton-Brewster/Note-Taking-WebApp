@@ -1,5 +1,5 @@
 const express = require("express");
-const apiRouting = require(`./Develop/routing/apiRoutes`);
+const api = require(`./Develop/routing/apiRoutes`);
 
 const app = express();
 const PORT = process.env.PORT || 9090;
@@ -10,7 +10,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(`${__dirname}/Develop/public`));
 
-apiRouting.route(app);
+api.route(app);
 require("./Develop/routing/htmlRoutes")(app);
 
 app.listen(PORT, (err) => {
@@ -18,4 +18,4 @@ app.listen(PORT, (err) => {
   console.log(`Server live: http://localhost:${PORT}`);
 });
 
-apiRouting.setDB();
+api.setDB();
