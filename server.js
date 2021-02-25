@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
-app.use(express.static(`${__dirname}/Develop/public`));
+app.use(express.static(`Develop/public`));
 
 api.route(app);
 html.route(app);
